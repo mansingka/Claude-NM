@@ -38,3 +38,23 @@ writes the new persona → Larry delegates to it and sanity-checks the result.
   should state explicitly what it does *not* do.
 - **Adding an agent** is itself Nolan's job — prefer routing through Nolan over
   hand-writing a new persona, so role definitions stay consistent.
+
+## Git & Version Control Workflow
+
+All work on this project must be committed to Git and pushed to GitHub regularly to maintain a complete history and ensure no work is lost.
+
+- **Commit after each completed task**: After finishing a task, feature, or fix, create a clean commit
+- **Push immediately**: Push to GitHub right after committing — don't batch multiple commits
+- **Clean commit messages**: Each message should start with a verb and clearly describe what changed:
+  - `Add feature: [description]`
+  - `Fix bug: [description]`
+  - `Update: [what changed and why]`
+  - `Refactor: [description]`
+  - `Docs: [description]`
+- **Why this matters**: 
+  - **Safety** — GitHub is a backup; work is never lost locally
+  - **History** — Clear record of what was done and when
+  - **Reversibility** — Easy to revert changes if needed
+  - **Transparency** — Complete audit trail of project progress
+
+**Repository**: https://github.com/mansingka/Claude-NM
