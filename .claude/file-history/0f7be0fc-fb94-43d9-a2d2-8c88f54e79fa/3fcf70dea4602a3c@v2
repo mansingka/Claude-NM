@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vinyas Innovative Technologies Ltd — Equity Research</title>
+<style>
+  :root{
+    --navy:#0f2742; --navy2:#1b3a5c; --slate:#33475b; --ink:#1a2230;
+    --muted:#5b6b7d; --line:#e2e8f0; --bg:#f4f6f9; --card:#ffffff;
+    --accent:#c8a04a; --accent2:#0e7c66; --red:#b3392f; --green:#1d7a4d;
+    --amber:#b9821a; --chip:#eef2f7;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+  body{
+    margin:0; font-family:"Segoe UI",-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink); background:var(--bg); line-height:1.55; font-size:14.5px;
+  }
+  .page{max-width:920px; margin:0 auto; background:var(--card); box-shadow:0 1px 24px rgba(15,39,66,.08);}
+  /* ---- Cover ---- */
+  .cover{
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 60%,#24507c 100%);
+    color:#fff; padding:48px 54px 40px;
+  }
+  .eyebrow{letter-spacing:.22em; font-size:11px; text-transform:uppercase; color:var(--accent); font-weight:700;}
+  .cover h1{font-size:33px; margin:10px 0 4px; font-weight:700; letter-spacing:-.5px;}
+  .cover .sub{font-size:15px; color:#bcd0e6; margin-bottom:26px;}
+  .tickline{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:28px;}
+  .tag{background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.18); padding:4px 11px; border-radius:20px; font-size:12px; color:#e7eef6;}
+  .keygrid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.16); border-radius:8px; overflow:hidden;}
+  .kc{background:rgba(15,39,66,.32); padding:14px 16px;}
+  .kc .l{font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; color:#9fb6cf;}
+  .kc .v{font-size:20px; font-weight:700; margin-top:3px; color:#fff;}
+  .kc .v small{font-size:12px; font-weight:500; color:#bcd0e6;}
+  .verdict-banner{display:flex; align-items:center; gap:18px; margin-top:26px; background:rgba(255,255,255,.07); border-left:4px solid var(--accent); padding:16px 20px; border-radius:0 8px 8px 0;}
+  .verdict-banner .rate{font-size:22px; font-weight:800; color:var(--accent); white-space:nowrap;}
+  .verdict-banner .txt{font-size:13.5px; color:#dbe6f1;}
+  /* ---- Body ---- */
+  .body{padding:34px 54px 16px;}
+  section{margin-bottom:30px;}
+  h2{font-size:20px; color:var(--navy); border-bottom:2px solid var(--line); padding-bottom:7px; margin:34px 0 16px; letter-spacing:-.3px;}
+  h2 .n{color:var(--accent); font-weight:800; margin-right:8px;}
+  h3{font-size:15.5px; color:var(--navy2); margin:18px 0 8px;}
+  p{margin:9px 0;}
+  .lead{font-size:15.5px; color:var(--slate);}
+  ul{margin:8px 0 8px 0; padding-left:20px;} li{margin:5px 0;}
+  strong{color:var(--ink);}
+  a{color:var(--accent2); text-decoration:none;} a:hover{text-decoration:underline;}
+  /* tables */
+  table{width:100%; border-collapse:collapse; margin:14px 0; font-size:13px;}
+  th,td{padding:8px 10px; text-align:right; border-bottom:1px solid var(--line);}
+  th:first-child,td:first-child{text-align:left;}
+  thead th{background:var(--navy); color:#fff; font-weight:600; font-size:11.5px; text-transform:uppercase; letter-spacing:.04em; border-bottom:none;}
+  tbody tr:nth-child(even){background:#f7f9fc;}
+  tbody tr:hover{background:#eef3f9;}
+  .tcap{font-size:11.5px; color:var(--muted); margin-top:-6px;}
+  .pos{color:var(--green); font-weight:600;} .neg{color:var(--red); font-weight:600;}
+  /* callouts */
+  .box{border-radius:9px; padding:16px 18px; margin:14px 0; font-size:13.5px;}
+  .box .bt{font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.05em; margin-bottom:6px;}
+  .box.crux{background:#fdf6e8; border:1px solid #ecd9a6;} .box.crux .bt{color:var(--amber);}
+  .box.bull{background:#eef8f1; border:1px solid #bfe3cc;} .box.bull .bt{color:var(--green);}
+  .box.bear{background:#fbeeec; border:1px solid #eecac4;} .box.bear .bt{color:var(--red);}
+  .box.note{background:#eef2f7; border:1px solid #d6e0ea;} .box.note .bt{color:var(--navy2);}
+  .two{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .two ul{padding-left:18px;}
+  /* score bars */
+  .scorerow{display:flex; align-items:center; gap:12px; margin:7px 0; font-size:13px;}
+  .scorerow .lab{width:165px; color:var(--slate);}
+  .bar{flex:1; height:9px; background:#e7edf3; border-radius:6px; overflow:hidden;}
+  .bar > i{display:block; height:100%; border-radius:6px;}
+  .scorerow .sc{width:54px; text-align:right; font-weight:700; color:var(--navy);}
+  .chip{display:inline-block; background:var(--chip); border:1px solid var(--line); border-radius:5px; padding:1px 8px; font-size:12px; color:var(--slate); margin:2px 3px 2px 0;}
+  .footer{padding:22px 54px 40px; color:var(--muted); font-size:11.5px; border-top:1px solid var(--line); background:#fafbfd;}
+  .footer h4{color:var(--slate); font-size:12px; text-transform:uppercase; letter-spacing:.06em; margin:0 0 8px;}
+  .src{font-size:11px; line-height:1.7; word-break:break-word;}
+  @media print{
+    body{background:#fff; font-size:11.5px;}
+    .page{box-shadow:none; max-width:none;}
+    .cover{padding:34px 38px;} .body{padding:24px 38px 8px;} .footer{padding:18px 38px;}
+    section,table,.box{break-inside:avoid;} h2{break-after:avoid;}
+    .keygrid .kc{background:#163050 !important;}
+  }
+  @media(max-width:680px){
+    .keygrid{grid-template-columns:repeat(2,1fr);} .two{grid-template-columns:1fr;}
+    .cover,.body,.footer{padding-left:24px; padding-right:24px;} .scorerow .lab{width:120px;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ================= COVER ================= -->
+  <div class="cover">
+    <div class="eyebrow">Equity Research &nbsp;&bull;&nbsp; Initiating View &nbsp;&bull;&nbsp; Small-Cap / EMS &amp; Defence Electronics</div>
+    <h1>Vinyas Innovative Technologies Ltd</h1>
+    <div class="sub">High-mix defence &amp; aerospace electronics manufacturer (EMS) &nbsp;|&nbsp; Mysuru, Karnataka</div>
+    <div class="tickline">
+      <span class="tag">NSE&nbsp;(SME&nbsp;Emerge): <strong>VINYAS</strong></span>
+      <span class="tag">ISIN: INE0OLS01010</span>
+      <span class="tag">Sector: EMS / Defence Electronics</span>
+      <span class="tag">Report date: 15 Jun 2026</span>
+      <span class="tag">Currency: INR</span>
+    </div>
+    <div class="keygrid">
+      <div class="kc"><div class="l">Share price</div><div class="v">&#8377;1,405</div></div>
+      <div class="kc"><div class="l">Market cap</div><div class="v">&#8377;1,768<small> cr</small></div></div>
+      <div class="kc"><div class="l">P/E (TTM)</div><div class="v">~57&times;</div></div>
+      <div class="kc"><div class="l">52-wk range</div><div class="v">809<small> – 1,524</small></div></div>
+      <div class="kc"><div class="l">FY26 Revenue</div><div class="v">&#8377;514<small> cr</small></div></div>
+      <div class="kc"><div class="l">FY26 PAT</div><div class="v">&#8377;30.9<small> cr</small></div></div>
+      <div class="kc"><div class="l">Order book</div><div class="v">&#8377;1,309<small> cr</small></div></div>
+      <div class="kc"><div class="l">Promoter / pledge</div><div class="v">29.4%<small> / 0%</small></div></div>
+    </div>
+    <div class="verdict-banner">
+      <div class="rate">HOLD / ACCUMULATE ON DIPS</div>
+      <div class="txt">A genuine, well-positioned defence-electronics growth story with a 2.5&times;-revenue order book and large operating-leverage runway &mdash; but priced for perfection at ~57&times; earnings while reported profits are <strong>not</strong> converting to cash. We like the franchise, not the entry price.</div>
+    </div>
+  </div>
+
+  <div class="body">
+
+  <!-- ================= EXEC SUMMARY ================= -->
+  <section>
+    <h2><span class="n">1.</span>Executive Summary</h2>
+    <p class="lead">Vinyas is a Mysuru-based Electronics Manufacturing Services (EMS) company that has quietly become one of India's more specialised <strong>defence &amp; aerospace</strong> contract manufacturers. It runs a high-mix, low-to-medium-volume, build-to-print / build-to-spec model for complex PCB assemblies and box-builds, with the right gatekeeper credentials (AS9100-D, defence industrial licence, NADCAP, ISO 13485). Roughly <strong>85–90% of its order book is defence/aerospace</strong> and ~50% of revenue is exported to Europe and the US.</p>
+    <p>The numbers have inflected hard. Revenue compounded at ~20% over FY21–FY26 to <strong>₹514 cr</strong>, but profitability is the real story: EBITDA margin expanded from ~6% to <strong>12.6%</strong> and PAT went from ₹1.2 cr (FY21) to <strong>₹30.9 cr (FY26)</strong>. A ₹1,309 cr order book (~2.5× FY26 revenue) and only 35–40% capacity utilisation give multi-year, operating-leverage-rich visibility, and management guides to 30–35% revenue growth into FY27.</p>
+    <p>The catch — and it is a serious one — is <strong>cash conversion</strong>. The cash conversion cycle has stretched to ~232 days, receivable days have doubled to ~161, and despite ₹31 cr of reported FY26 profit, <strong>operating cash flow was roughly –₹32 cr and free cash flow about –₹77 cr</strong>. Growth is being funded by working-capital debt and equity dilution (a ₹150 cr warrant raise in 2025). At ~57× trailing earnings, ~8× book and ~32× EV/EBITDA, the stock already prices in flawless execution.</p>
+    <div class="box note">
+      <div class="bt">Bottom line</div>
+      A high-quality, structurally well-positioned franchise riding India's defence-indigenisation and EMS tailwinds — but expensive and cash-flow-risky today. We would own the story on pullbacks and on evidence that cash collection is normalising, rather than chase it at a near-record multiple.
+    </div>
+  </section>
+
+  <!-- ================= SNAPSHOT ================= -->
+  <section>
+    <h2><span class="n">2.</span>Investment Snapshot</h2>
+    <table>
+      <thead><tr><th>Metric</th><th>Value</th><th>Metric</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Share price (15 Jun 2026)</td><td>₹1,404.95</td><td>FY26 Revenue</td><td>₹514 cr (+29.5%)</td></tr>
+        <tr><td>Market capitalisation</td><td>~₹1,768 cr</td><td>FY26 EBITDA / margin</td><td>₹64.8 cr / 12.6%</td></tr>
+        <tr><td>52-week high / low</td><td>₹1,524 / ₹809</td><td>FY26 PAT / margin</td><td>₹30.9 cr / 6.0%</td></tr>
+        <tr><td>P/E (TTM)</td><td>~57–60×</td><td>EPS (FY26)</td><td>~₹24.5</td></tr>
+        <tr><td>P/B</td><td>~8×</td><td>ROE / ROCE</td><td>~16% / ~19%</td></tr>
+        <tr><td>EV/EBITDA</td><td>~32×</td><td>Order book (Mar-26)</td><td>₹1,309 cr</td></tr>
+        <tr><td>Dividend yield</td><td>0% (none ever)</td><td>Net debt / D-E</td><td>~₹118 cr / ~0.55–0.7×</td></tr>
+        <tr><td>Promoter holding / pledge</td><td>29.4% / 0%</td><td>Cash conversion cycle</td><td>~232 days</td></tr>
+      </tbody>
+    </table>
+    <p class="tcap">Figures are standalone unless noted; FY26 = year ended 31 Mar 2026. Market data observed 15 Jun 2026 — small-cap values move quickly. Minor source variances exist (e.g. FY26 revenue ₹514 vs ₹518 cr; market cap ₹1,768–1,841 cr).</p>
+  </section>
+
+  <!-- ================= BUSINESS ================= -->
+  <section>
+    <h2><span class="n">3.</span>Business Overview</h2>
+    <p>Incorporated in <strong>2001</strong> by founder &amp; Managing Director <strong>Narendra Narayanan</strong> (USC electrical engineer; son Sumukh Narendra is Executive Director), Vinyas listed on the <strong>NSE Emerge (SME) platform in October 2023</strong> and operates a single &gt;150,000 sq ft facility in Mysuru, including a dedicated export (EHTP) unit and a high-reliability Class-III defence line.</p>
+    <h3>What it does</h3>
+    <p>Vinyas is a pure-play EMS/ODM provider deliberately focused on <strong>high-complexity, low-to-medium-volume</strong> work, which carries higher entry barriers and steadier margins than commodity consumer EMS:</p>
+    <span class="chip">PCB assembly / SMT &amp; THT</span><span class="chip">Box build &amp; system integration</span><span class="chip">Cable &amp; wire harnessing</span><span class="chip">Design / DFM &amp; NPI</span><span class="chip">Testing &amp; inspection (ESS/HASS)</span><span class="chip">Aftermarket / repair</span>
+    <h3>End-markets &amp; mix</h3>
+    <p>Six verticals — Aerospace &amp; Defence, Medical, Automotive, Industrial, Telecom and Consumer — but the business is heavily skewed: <strong>defence &amp; aerospace is ~85–90% of the order book</strong> (~78% of H1-FY26 revenue). <strong>Exports are ~50% of revenue</strong> (Europe and the US), which usefully diversifies away from pure Indian-PSU dependence.</p>
+    <h3>Credentials &amp; customers</h3>
+    <p>The moat in defence EMS is qualification, not price. Vinyas holds <strong>AS9100-D</strong> (aerospace QMS — the gatekeeper credential), a <strong>Defence Industrial Licence</strong>, <strong>ISO 13485</strong> (medical), and received <strong>NADCAP</strong> accreditation in 2025. <strong>Bharat Electronics (BEL)</strong> is a confirmed recurring customer (orders of ₹43.5 cr and ₹26.25 cr documented); exact customer concentration is not disclosed, and the IPO prospectus flagged reliance on a single large customer — a risk to monitor.</p>
+    <h3>Recent strategic moves</h3>
+    <ul>
+      <li><strong>US subsidiary</strong> — Vinyas Innovative Technologies Inc., wholly-owned, incorporated May 2026, to build US business-development presence.</li>
+      <li><strong>Israel defence JV</strong> — 26% Vinyas / 74% Israeli partner (₹2.6 cr investment, May 2026) for manufacturing, integration and lifecycle support; ~10–15% of supplies are already Israel-sourced.</li>
+      <li><strong>Capacity expansion</strong> — new SMT lines and quality upgrades; ~₹30 cr FY26 capex against just 35–40% utilisation.</li>
+    </ul>
+  </section>
+
+  <!-- ================= INDUSTRY ================= -->
+  <section>
+    <h2><span class="n">4.</span>Industry &amp; Structural Opportunity</h2>
+    <p>Vinyas sits at the intersection of two strong, policy-backed tailwinds:</p>
+    <ul>
+      <li><strong>Indian EMS</strong> — variously sized at US$35–65 bn (2025) growing ~10–18% CAGR; brokerages model the <em>listed</em> EMS universe at ~30% revenue CAGR over FY25–28. A ₹22,919 cr electronics-component PLI (approved 2025), "Make in India", import substitution and China+1 underpin demand.</li>
+      <li><strong>Defence indigenisation</strong> — India's defence production has crossed ~US$18 bn; five Positive Indigenisation Lists earmark 5,000+ items for domestic manufacture, with a target to raise indigenous content past 70%. Defence electronics &amp; avionics is estimated to roughly double to ~US$17.6 bn by 2031.</li>
+    </ul>
+    <p>For a small, defence-skewed contract manufacturer, this is a favourable backdrop: certified suppliers to defence primes enjoy sticky, multi-year, higher-margin programmes that larger consumer-EMS players underprioritise. The ~50% export tilt adds global-supply-chain optionality beyond domestic budgets. The flip side is that the thesis leans on policy continuity and is exposed to <strong>lumpy, milestone-driven revenue recognition</strong>, common across defence peers.</p>
+  </section>
+
+  <!-- ================= FINANCIALS ================= -->
+  <section>
+    <h2><span class="n">5.</span>Financial Analysis</h2>
+    <h3>Income statement (₹ cr, standalone)</h3>
+    <table>
+      <thead><tr><th>Year (Mar)</th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th><th>FY26</th></tr></thead>
+      <tbody>
+        <tr><td>Revenue</td><td>207.8</td><td>212.2</td><td>238.9</td><td>320.8</td><td>400.2</td><td><strong>514.3</strong></td></tr>
+        <tr><td>Growth %</td><td>—</td><td>2.1%</td><td>12.6%</td><td class="pos">34.3%</td><td class="pos">24.7%</td><td class="pos">29.5%</td></tr>
+        <tr><td>EBITDA</td><td>13.4</td><td>16.7</td><td>25.1</td><td>37.0</td><td>44.4</td><td><strong>64.8</strong></td></tr>
+        <tr><td>EBITDA margin %</td><td>6.4%</td><td>7.9%</td><td>10.5%</td><td>11.5%</td><td>11.1%</td><td class="pos">12.6%</td></tr>
+        <tr><td>Net profit (PAT)</td><td>1.2</td><td>1.0</td><td>7.3</td><td>15.4</td><td>19.4</td><td><strong>30.9</strong></td></tr>
+        <tr><td>Net margin %</td><td>0.6%</td><td>0.5%</td><td>3.1%</td><td>4.8%</td><td>4.9%</td><td class="pos">6.0%</td></tr>
+        <tr><td>EPS (₹, approx.)</td><td>3.3</td><td>2.7</td><td>~12</td><td>~16.5</td><td>15.4</td><td>24.5</td></tr>
+      </tbody>
+    </table>
+    <p class="tcap">EPS for FY23–FY24 is approximate and distorted by the FY24 equity expansion (equity capital ₹4 cr → ₹13 cr). Revenue ~20% CAGR FY21→FY26; PAT inflected sharply from FY23.</p>
+
+    <h3>Returns &amp; balance sheet</h3>
+    <table>
+      <thead><tr><th>Metric</th><th>FY23</th><th>FY24</th><th>FY25</th><th>FY26</th></tr></thead>
+      <tbody>
+        <tr><td>ROE %</td><td>16%</td><td>16%</td><td>~14–16%</td><td>~13%</td></tr>
+        <tr><td>ROCE %</td><td>19%</td><td>16%</td><td>~19%</td><td>~18–19%</td></tr>
+        <tr><td>Total borrowings (₹ cr)</td><td>86</td><td>97</td><td>104</td><td>~130</td></tr>
+        <tr><td>Net worth (₹ cr)</td><td>46</td><td>128</td><td>147</td><td>~236</td></tr>
+        <tr><td>Debt / equity</td><td>1.87</td><td>0.75</td><td>0.71</td><td>~0.55</td></tr>
+      </tbody>
+    </table>
+    <p>The balance sheet improved markedly: the FY24 equity raise de-levered D/E from 1.87× to 0.71×, and the ₹150 cr 2025 warrant issue lifted net worth further. Reported returns are healthy (ROE/ROCE in the mid-teens to high-teens). Leverage is no longer the worry — <strong>cash conversion is.</strong></p>
+
+    <div class="box crux">
+      <div class="bt">⚑ The crux — profits aren't becoming cash</div>
+      As an EMS firm selling to slow-paying government/PSU and defence customers, Vinyas is structurally working-capital heavy — and the data shows it worsening, not improving. This is the single most important slide in the report.
+    </div>
+
+    <h3>Cash flow &amp; working capital (₹ cr / days, standalone)</h3>
+    <table>
+      <thead><tr><th>Item</th><th>FY21</th><th>FY22</th><th>FY23</th><th>FY24</th><th>FY25</th><th>FY26</th></tr></thead>
+      <tbody>
+        <tr><td>Operating cash flow</td><td class="neg">-25</td><td class="pos">12</td><td class="pos">12</td><td class="neg">-29</td><td class="pos">9</td><td class="neg">-32</td></tr>
+        <tr><td>Free cash flow (approx.)</td><td class="neg">-27</td><td class="pos">11</td><td class="pos">9</td><td class="neg">-57</td><td class="pos">7</td><td class="neg">-77</td></tr>
+        <tr><td>Receivable days</td><td>52</td><td>100</td><td>33</td><td>101</td><td>163</td><td>161</td></tr>
+        <tr><td>Inventory days</td><td>238</td><td>247</td><td>211</td><td>166</td><td>88</td><td>114</td></tr>
+        <tr><td>Payable days</td><td>93</td><td>130</td><td>71</td><td>74</td><td>36</td><td>43</td></tr>
+        <tr><td>Cash conversion cycle</td><td>197</td><td>217</td><td>173</td><td>193</td><td>216</td><td><strong>232</strong></td></tr>
+      </tbody>
+    </table>
+    <p>Three things to absorb: (1) operating cash flow has been negative in three of the last six years, including FY26 despite record profit; (2) receivable days have <strong>doubled</strong> while payable days <strong>collapsed</strong> — a double squeeze (collecting slower, paying suppliers faster); (3) the cash conversion cycle is ~⅔ of a year and lengthening. The mechanical consequence is that growth must be financed externally — exactly what the rising working-capital debt and the warrant raise are doing. <strong>This is the metric to watch every results cycle.</strong></p>
+  </section>
+
+  <!-- ================= VALUATION ================= -->
+  <section>
+    <h2><span class="n">6.</span>Valuation</h2>
+    <p>At ₹1,405, Vinyas trades at ~57–60× trailing earnings, ~8× book and ~32× EV/EBITDA — a full re-rating (the stock is up ~50% over 52 weeks and near its high). That sits within the listed defence-EMS cluster (peers at ~54–71× P/E) but offers <strong>limited margin of safety</strong> for a sub-₹520 cr-revenue company with negative free cash flow.</p>
+
+    <h3>Forward illustration (house scenario — not company guidance)</h3>
+    <table>
+      <thead><tr><th>Scenario</th><th>FY27E</th><th>FY28E</th></tr></thead>
+      <tbody>
+        <tr><td>Revenue (₹ cr)</td><td>~668 (+30%)</td><td>~855 (+28%)</td></tr>
+        <tr><td>EBITDA margin</td><td>11.5%</td><td>11.5–12%</td></tr>
+        <tr><td>PAT (₹ cr)</td><td>~40</td><td>~52</td></tr>
+        <tr><td>EPS (₹)</td><td>~32</td><td>~41</td></tr>
+        <tr><td>Implied P/E (at ₹1,405)</td><td>~44×</td><td>~34×</td></tr>
+      </tbody>
+    </table>
+    <p class="tcap">Illustrative only, built off management's 30–35% growth and 11–12% EBITDA-margin guidance plus the ₹1,309 cr order book. Even on these robust assumptions, the multiple only normalises to ~34× two years out — i.e. much of the next two years of growth is already in the price.</p>
+
+    <h3>Peer comparison (approximate, FY26)</h3>
+    <table>
+      <thead><tr><th>Company</th><th>Revenue (₹ cr)</th><th>Mkt cap (₹ cr)</th><th>P/E (~)</th><th>Profile vs Vinyas</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Vinyas</strong></td><td>514</td><td>1,768</td><td>57</td><td>Baseline — defence-heavy, small</td></tr>
+        <tr><td>Centum Electronics</td><td>~953</td><td>~4,873</td><td>—</td><td>Closest analog (defence/aero ESDM)</td></tr>
+        <tr><td>Data Patterns</td><td>925</td><td>~20,388</td><td>~66</td><td>Pure defence, but OEM/design (richer)</td></tr>
+        <tr><td>Cyient DLM</td><td>~mid</td><td>~3,340</td><td>—</td><td>Aero/defence EMS — moderate fit</td></tr>
+        <tr><td>Avalon Technologies</td><td>—</td><td>~5,720</td><td>~71</td><td>Industrial/aero/defence mix</td></tr>
+        <tr><td>Kaynes Technology</td><td>3,626</td><td>~24,375</td><td>~66</td><td>Larger, diversified</td></tr>
+        <tr><td>Syrma SGS</td><td>large</td><td>~14,070</td><td>~54–66</td><td>Larger, broad EMS</td></tr>
+      </tbody>
+    </table>
+    <p class="tcap">Peer revenues/multiples drawn from secondary aggregators — directional, verify against filings. Most comparable: Centum Electronics (size + defence skew); Data Patterns shares the end-market but is a higher-margin design house.</p>
+  </section>
+
+  <!-- ================= OWNERSHIP ================= -->
+  <section>
+    <h2><span class="n">7.</span>Ownership &amp; Catalysts</h2>
+    <div class="two">
+      <div>
+        <h3>Shareholding (Mar 2026)</h3>
+        <table>
+          <thead><tr><th>Holder</th><th>%</th></tr></thead>
+          <tbody>
+            <tr><td>Promoter (0% pledged)</td><td>29.4%</td></tr>
+            <tr><td>DII</td><td>6.5%</td></tr>
+            <tr><td>FII / FPI</td><td>0.5%</td></tr>
+            <tr><td>Public / retail</td><td>63.6%</td></tr>
+          </tbody>
+        </table>
+        <p class="tcap">DII holding has roughly doubled (3%→6.5%) — quiet institutional accumulation. Promoter stake is low at 29.4% (most under lock-in), with zero pledge.</p>
+      </div>
+      <div>
+        <h3>Catalysts to watch</h3>
+        <ul>
+          <li><strong>Cash collection</strong> — any fall in receivable days / positive OCF would be the key re-rating trigger (or de-rating risk if it worsens).</li>
+          <li><strong>Order inflows</strong> — FY27 guidance of +25–30%; recent wins ₹60.8 cr (May-26), ₹49.4 cr, ₹53.7 cr.</li>
+          <li><strong>Capacity ramp</strong> — new SMT lines vs 35–40% utilisation = operating-leverage upside.</li>
+          <li><strong>US subsidiary &amp; Israel JV</strong> — execution/first revenue.</li>
+          <li><strong>Warrant conversion</strong> — ~₹89 cr still receivable; backed by Madhusudan Kela's Singularity Ventures.</li>
+          <li><strong>Possible main-board migration</strong> from NSE SME (would broaden liquidity/coverage).</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BULL / BEAR ================= -->
+  <section>
+    <h2><span class="n">8.</span>Bull vs Bear</h2>
+    <div class="two">
+      <div class="box bull">
+        <div class="bt">Bull case</div>
+        <ul>
+          <li>Revenue +25–31% YoY; PAT 3-yr CAGR ~60%; margin expansion intact.</li>
+          <li>₹1,309 cr order book (~2.5× revenue), 18–24 month execution visibility.</li>
+          <li>Only 35–40% utilisation → strong operating-leverage runway.</li>
+          <li>High entry barriers: AS9100, NADCAP, defence licence, sticky qualified-supplier status.</li>
+          <li>Clean signals: 0% pledge, de-levered, marquee investor (Kela), rising DII.</li>
+          <li>Diversifiers: ~50% exports, US subsidiary, Israel JV.</li>
+        </ul>
+      </div>
+      <div class="box bear">
+        <div class="bt">Bear case</div>
+        <ul>
+          <li><strong>Negative operating &amp; free cash flow</strong> despite record profit — earnings-quality flag.</li>
+          <li>Working-capital stretch: CCC ~232 days, receivables ~161 days.</li>
+          <li>Expensive: ~57× P/E, ~8× P/B, ~32× EV/EBITDA — priced for perfection.</li>
+          <li>Customer/sector concentration (defence 85–90%; undisclosed single-customer reliance).</li>
+          <li>SME-origin liquidity risk; low 29.4% promoter holding; ongoing warrant dilution.</li>
+          <li>Lumpy defence revenue recognition; policy/budget dependence; Israel supply exposure.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= RISK SCORE ================= -->
+  <section>
+    <h2><span class="n">9.</span>Scorecard &amp; Verdict</h2>
+    <div class="scorerow"><div class="lab">Growth &amp; order visibility</div><div class="bar"><i style="width:90%;background:var(--green);"></i></div><div class="sc">9 / 10</div></div>
+    <div class="scorerow"><div class="lab">Competitive moat</div><div class="bar"><i style="width:75%;background:var(--green);"></i></div><div class="sc">7.5 / 10</div></div>
+    <div class="scorerow"><div class="lab">Margins &amp; returns</div><div class="bar"><i style="width:70%;background:var(--accent2);"></i></div><div class="sc">7 / 10</div></div>
+    <div class="scorerow"><div class="lab">Balance-sheet strength</div><div class="bar"><i style="width:62%;background:var(--accent2);"></i></div><div class="sc">6 / 10</div></div>
+    <div class="scorerow"><div class="lab">Cash conversion / quality</div><div class="bar"><i style="width:30%;background:var(--red);"></i></div><div class="sc">3 / 10</div></div>
+    <div class="scorerow"><div class="lab">Valuation comfort</div><div class="bar"><i style="width:32%;background:var(--red);"></i></div><div class="sc">3 / 10</div></div>
+    <div class="scorerow"><div class="lab">Disclosure / liquidity</div><div class="bar"><i style="width:45%;background:var(--amber);"></i></div><div class="sc">4.5 / 10</div></div>
+
+    <div class="box note" style="margin-top:18px;">
+      <div class="bt">Verdict — Hold / Accumulate on dips</div>
+      Vinyas is a real franchise in the right place at the right time, and the order book plus operating-leverage runway make the growth case credible. But two things hold us back from an outright Buy at ₹1,405: a valuation that already discounts two years of flawless execution, and a working-capital profile that is turning reported profit into <em>negative</em> cash. We would build a position on meaningful pullbacks and, above all, on evidence that receivable days are falling and operating cash flow is turning durably positive. Until then, the risk/reward is balanced rather than compelling. <strong>Position sizing should respect its small-cap/SME liquidity.</strong>
+    </div>
+  </section>
+
+  </div><!-- /body -->
+
+  <!-- ================= FOOTER ================= -->
+  <div class="footer">
+    <h4>Important disclaimer</h4>
+    <p>This document is an independent research summary prepared for informational and educational purposes only. It is <strong>not investment advice</strong>, not a solicitation or recommendation to buy or sell any security, and does not consider your individual financial circumstances. The author holds no position and is not a registered investment adviser. Vinyas is a small-cap, SME-platform-origin stock with elevated liquidity and volatility risk.</p>
+    <p>Figures are compiled from third-party aggregators and news sources and observed on 14–15 June 2026; they have <strong>not</strong> been reconciled against audited annual reports and may contain errors or be superseded. Several items remain unverified (exact customer concentration, statutory auditor opinion, full contingent-liability schedule, NSE main-board status). <strong>Verify all data against primary filings (NSE/BSE, RHP, FY25/FY26 annual report) before making any decision.</strong></p>
+    <h4 style="margin-top:14px;">Key sources</h4>
+    <p class="src">
+      screener.in/company/VINYAS &middot; vinyasit.com &middot; NSE/BSE filings &amp; RHP &middot; tickertape.in &middot; trendlyne.com &middot; stockanalysis.com &middot; simplywall.st &middot; finology &middot; Investing.com (FY26 earnings-call summary) &middot; scanx.trade &middot; businessupturn.com &middot; tradebrains.in &middot; dsij.in &middot; tribuneindia.com &middot; Mordor Intelligence / PS Market Research (EMS sizing) &middot; IBEF &amp; Motilal Oswal (defence/EMS sector) &middot; Mobility Foresights (defence electronics).
+    </p>
+    <p class="src" style="margin-top:10px; color:#9aa7b4;">Prepared 15 June 2026 &bull; Currency: INR &bull; Fiscal years end 31 March.</p>
+  </div>
+
+</div><!-- /page -->
+</body>
+</html>
